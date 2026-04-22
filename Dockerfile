@@ -3,8 +3,8 @@ WORKDIR /app
 
 COPY . ./
 
-RUN dotnet restore
-RUN dotnet publish -c Release -o out
+RUN dotnet restore WaveCylinderApp.csproj
+RUN dotnet publish WaveCylinderApp.csproj -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
@@ -14,4 +14,4 @@ COPY --from=build /app/out .
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://0.0.0.0:8080
 
-ENTRYPOINT ["dotnet", "WaveCylinderApps.dll"]
+ENTRYPOINT ["dotnet", "WaveCylinderApp.dll"]
